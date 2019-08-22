@@ -25,8 +25,12 @@ class Instructor extends Person {
     console.log(`Today we are learning about ${subject}.`);
   }
 
-  grade(student, subject) {
+  perfectGrade(student, subject) {
     console.log(`${student.name} receives a perfect score on ${subject}.`);
+  }
+
+  gradeStudent(student) {
+    student.grade *= Math.random();
   }
 }
 
@@ -105,7 +109,7 @@ const billy = new ProjectManager({
   age: 16,
   specialty: "Networking",
   favLanguage: "C",
-  catchPhrase: "Don't forget to make an RSA key!",
+  catchPhrase: "Don't forget to generate an RSA key!",
   gradClassName: "CS1",
   favInstructor: joe
 });
@@ -179,6 +183,7 @@ console.log(`${billy.name} graduated in the class ${billy.gradClassName}.`);
 console.log(
   `${billy.name}'s favorite instructor is ${billy.favInstructor.name}.`
 );
+console.log(`${billy.name} likes to say, "${billy.catchPhrase}"`);
 billy.standUp("web23_billy");
 billy.demo("HTML");
 billy.debugsCode(raphael, "HTML");
@@ -190,6 +195,7 @@ console.log(`${isaiah.name} graduated in the class ${isaiah.gradClassName}.`);
 console.log(
   `${isaiah.name}'s favorite instructor is ${isaiah.favInstructor.name}.`
 );
+console.log(`${isaiah.name} likes to say, "${isaiah.catchPhrase}"`);
 isaiah.standUp("web23_isaiah");
 isaiah.demo("CSS");
 isaiah.debugsCode(franz, "CSS");
@@ -228,3 +234,10 @@ Stretch Problem
     - This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
     - If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
+
+console.log("\n\n\nTESTING STRETCH - gradeStudent METHOD \n\n");
+
+console.log(`${raphael.name}'s current grade: ${raphael.grade}`);
+console.log(`${isaiah.name} grades ${raphael.name}'s assignment...`);
+isaiah.gradeStudent(raphael);
+console.log(`${raphael.name}'s grade after assignment: ${raphael.grade}`);
