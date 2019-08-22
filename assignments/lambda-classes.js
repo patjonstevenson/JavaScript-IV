@@ -29,8 +29,9 @@ class Instructor extends Person {
     console.log(`${student.name} receives a perfect score on ${subject}.`);
   }
 
-  gradeStudent(student) {
-    student.grade *= Math.random();
+  gradeAssignment(student) {
+    const assignmentGrade = Math.random() * 60 + 40;
+    student.grades = [...student.grades, assignmentGrade];
   }
 }
 
@@ -61,7 +62,8 @@ class Student extends Person {
     this.previousBackground = attributes.previousBackground;
     this.className = attributes.className;
     this.favSubjects = attributes.favSubjects;
-    this.grade = attributes.grade;
+    this.grades = attributes.grades;
+    this.pm = attributes.pm;
   }
 
   // Methods
@@ -76,6 +78,35 @@ class Student extends Person {
 
   sprintChallenge(subject) {
     console.log(`${this.name} has begun sprint challenge on ${subject}.`);
+  }
+
+  averageGrade() {
+    return this.grades.reduce((sum, a) => sum + a, 0) / this.grades.length;
+  }
+
+  graduate() {
+    let graduate = false;
+    let assignmentCounter = 0;
+    while (!graduate && assignmentCounter < 5) {
+      if (this.averageGrade() >= 70) {
+        graduate = true;
+        console.log(`${this.name} has graduated from Lambda School!`);
+        return;
+      } else {
+        this.pm.gradeAssignment(this);
+        assignmentCounter++;
+        console.log(
+          `${this.name}'s GPA is still too low to graduate.. let's have ${
+            this.pm.name
+          } grade some more assignments..`
+        );
+      }
+    }
+    console.log(
+      `After grading all of ${
+        this.name
+      }'s assignments, the GPA is ${this.averageGrade()}, which is unfortunately too low to graduate.`
+    );
   }
 }
 
@@ -133,7 +164,8 @@ const franz = new Student({
   previousBackground: "Manufacturing",
   className: "WEB23",
   favSubjects: ["Back-end", "Data Processing", "Higher-Order Functions"],
-  grade: 80
+  grades: [80, 60],
+  pm: isaiah
 });
 
 const raphael = new Student({
@@ -143,7 +175,8 @@ const raphael = new Student({
   previousBackground: "Construction",
   className: "WEB23",
   favSubjects: ["Networking", "System Programming", "C"],
-  grade: 90
+  grades: [90, 70],
+  pm: billy
 });
 
 // ***********
@@ -237,7 +270,12 @@ Stretch Problem
 
 console.log("\n\n\nTESTING STRETCH - gradeStudent METHOD \n\n");
 
-console.log(`${raphael.name}'s current grade: ${raphael.grade}`);
-console.log(`${isaiah.name} grades ${raphael.name}'s assignment...`);
-isaiah.gradeStudent(raphael);
-console.log(`${raphael.name}'s grade after assignment: ${raphael.grade}`);
+console.log(`${raphael.name}'s current grade: ${raphael.averageGrade()}`);
+console.log(`${raphael.pm.name} grades ${raphael.name}'s assignment...`);
+raphael.pm.gradeAssignment(raphael);
+console.log(`Raphael's Grades: ${raphael.grades}`);
+console.log(
+  `${raphael.name}'s grade after assignment: ${raphael.averageGrade()}`
+);
+
+raphael.graduate();
