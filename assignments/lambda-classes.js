@@ -104,6 +104,31 @@ class ProjectManagers extends Instructor{
 //   * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has submitted a PR for {subject}`
 //   * `sprintChallenge` similar to PRAssignment but logs out `student.name has begun sprint challenge on {subject}`
 ​
+class Student extends Person{
+    constructor(attributes){
+        super(attributes);
+
+        this.previousBackground = attributes.previousBackground;
+        this.className = attributes.className;
+        this.favSubjects = attributes.favSubjects;
+    }
+
+    // Methods
+    listsSubjects(){
+        console.log(`${this.name}'s favorite subjects are:`)
+        this.favSubjects.forEach(subject => console.log(`\n${subject}`));
+    }
+
+    PRAssignment(subject){
+        console.log(`${this.name} has submitted a PR for ${subject}.`);
+    }
+
+    sprintChallenge(subject){
+        console.log(`${this.name} has begun sprint challenge on ${subject}.`)
+    }
+}
+
+
 /*
 Stretch Problem
 * Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
