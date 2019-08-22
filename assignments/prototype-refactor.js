@@ -17,3 +17,23 @@ class GameObject {
     console.log(`${this.name} was removed from the game.`);
   }
 }
+
+class CharacterStats {
+  constructor(obj) {
+    this.healthPoints = obj.healthPoints;
+  }
+
+  takeDamage(damage) {
+    this.healthPoints -= damage;
+
+    console.log(`${this.name} took ${damage} damage!`);
+    if (this.healthPoints < 0) {
+      console.log(`${this.name}'s health has dropped below zero!`);
+    } else {
+      console.log(`${this.name} has ${this.healthPoints} health remaining.`);
+    }
+    if (this.healthPoints <= 0) {
+      this.destroy();
+    }
+  }
+}
