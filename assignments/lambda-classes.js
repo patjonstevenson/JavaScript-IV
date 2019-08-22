@@ -1,133 +1,224 @@
-// CODE here for your Lambda Classes
-
-/*
-- We have a school to build here! This project will get you used to thinking about classes in JavaScript and building them from a brand new data set.
-* Lambda personnel can be broken down into three different types of people.
-    - Instructors - extensions of Person
-    - Students - extensions of Person
-    - Project Managers - extensions of Instructors
-IMPORTANT - You'll need to create 2 - 3 objects for each class and test them according to their unique Attributes. For example:
-​
-const fred = new Instructor({
-  name: 'Fred',
-  location: 'Bedrock',
-  age: 37,
-  favLanguage: 'JavaScript',
-  specialty: 'Front-end',
-  catchPhrase: `Don't forget the homies`
-});
-​
-*/
-​
-// * First we need a Person class. This will be our `base-class`
-// * Person receives `name` `age` `location` all as props
-// * Person receives `speak` as a method.
-// * This method logs out a phrase `Hello my name is Fred, I am from Bedrock` where `name` and `location` are the object's own props
-
 class Person {
-    constructor(attributes){
-        this.name = attributes.name;
-        this.age = attributes.age;
-        this.location = attributes.location;
-    }
+  constructor(attributes) {
+    this.name = attributes.name;
+    this.age = attributes.age;
+    this.location = attributes.location;
+  }
 
-    // Methods
-    speak() {
-        console.log(`Hello my name is ${this.name}, I am from ${this.location}.`)
-    }
+  // Methods
+  speak() {
+    console.log(`Hello my name is ${this.name}, I am from ${this.location}.`);
+  }
 }
 
-​
-​
-// * Instructor has the following unique props:
-//   * `specialty` what the Instructor is good at i.e. 'redux'
-//   * `favLanguage` i.e. 'JavaScript, Python, Elm etc.'
-//   * `catchPhrase` i.e. `Don't forget the homies`
-// * Instructor has the following methods:
-//   * `demo` receives a `subject` string as an argument and logs out the phrase 'Today we are learning about {subject}' where subject is the param passed in.
-//   * `grade` receives a `student` object and a `subject` string as arguments and logs out '{student.name} receives a perfect score on {subject}'
-​
-class Instructor extends Person{
-    constructor(attributes){
-        super(attributes);
+class Instructor extends Person {
+  constructor(attributes) {
+    super(attributes);
 
-        this.specialty = attributes.specialty; 
-        this.favLanguage = attributes.favLanguage;
-        this.catchPhrase = attributes.catchPhrase;
-    }
+    this.specialty = attributes.specialty;
+    this.favLanguage = attributes.favLanguage;
+    this.catchPhrase = attributes.catchPhrase;
+  }
 
-    // Methods
-    demo(subject){
-        console.log(`Today we are learning about ${subject}.`);
-    }
+  // Methods
+  demo(subject) {
+    console.log(`Today we are learning about ${subject}.`);
+  }
 
-    grade(student, subject){
-        console.log(`${student.name} receives a perfect score on ${subject}.`);
-    }
-}
-​
-​
-​
-// * ProjectManagers are extensions of Instructors
-// * Project Manger has the following unique props:
-// * `gradClassName`: i.e. CS1
-//   * `favInstructor`: i.e. Sean
-// * ProjectManagers have the following Methods:
-//   * `standUp` a method that takes in a slack channel and logs `{name} announces to {channel}, @channel standy times!
-//   * `debugsCode` a method that takes in a student object and a subject and logs out `{name} debugs {student.name}'s code on {subject}`
-​
-class ProjectManagers extends Instructor{
-    constructor(attributes){
-        super(attributes);
-
-        this.gradClassName = attributes.gradClassName;
-        this.favInstructor = attributes.favInstructor;
-    }
-
-    // Methods
-    standUp(channel){
-        console.log(`${this.name} announces to ${channel}, @channel standup time!`);
-    }
-
-    debugsCode(student){
-        console.log(`${this.name} debugs ${student.name}'s code on ${this.subject}.`)
-    }
-}
-​
-​
-// * Student has the following unique props:
-//   * `previousBackground` i.e. what the Student used to do before Lambda School
-//   * `className` i.e. CS132
-//   * `favSubjects`. i.e. an array of the student's favorite subjects ['Html', 'CSS', 'JavaScript']
-// * Student has the following methods:
-//   * `listsSubjects` a method that logs out all of the student's favoriteSubjects one by one.
-//   * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has submitted a PR for {subject}`
-//   * `sprintChallenge` similar to PRAssignment but logs out `student.name has begun sprint challenge on {subject}`
-​
-class Student extends Person{
-    constructor(attributes){
-        super(attributes);
-
-        this.previousBackground = attributes.previousBackground;
-        this.className = attributes.className;
-        this.favSubjects = attributes.favSubjects;
-    }
-
-    // Methods
-    listsSubjects(){
-        console.log(`${this.name}'s favorite subjects are:`)
-        this.favSubjects.forEach(subject => console.log(`\n${subject}`));
-    }
-
-    PRAssignment(subject){
-        console.log(`${this.name} has submitted a PR for ${subject}.`);
-    }
-
-    sprintChallenge(subject){
-        console.log(`${this.name} has begun sprint challenge on ${subject}.`)
-    }
+  grade(student, subject) {
+    console.log(`${student.name} receives a perfect score on ${subject}.`);
+  }
 }
 
+class ProjectManager extends Instructor {
+  constructor(attributes) {
+    super(attributes);
+
+    this.gradClassName = attributes.gradClassName;
+    this.favInstructor = attributes.favInstructor;
+  }
+
+  // Methods
+  standUp(channel) {
+    console.log(
+      `${this.name} announces to ${channel}, "@channel standup time!"`
+    );
+  }
+
+  debugsCode(student, subject) {
+    console.log(`${this.name} debugs ${student.name}'s code on ${subject}.`);
+  }
+}
+
+class Student extends Person {
+  constructor(attributes) {
+    super(attributes);
+
+    this.previousBackground = attributes.previousBackground;
+    this.className = attributes.className;
+    this.favSubjects = attributes.favSubjects;
+    this.grade = attributes.grade;
+  }
+
+  // Methods
+  listsSubjects() {
+    console.log(`${this.name}'s favorite subjects are:`);
+    this.favSubjects.forEach(subject => console.log(`${subject}`));
+  }
+
+  PRAssignment(subject) {
+    console.log(`${this.name} has submitted a PR for ${subject}.`);
+  }
+
+  sprintChallenge(subject) {
+    console.log(`${this.name} has begun sprint challenge on ${subject}.`);
+  }
+}
+
+// ********************
+// ** INSTANTIATIONS **
+// ********************
+
+// INSTRUCTORS
+const fred = new Instructor({
+  name: "Fred",
+  location: "Bedrock",
+  age: 70,
+  favLanguage: "Java",
+  specialty: "Abstractions",
+  catchPhrase: `Don't forget the boilerplate!`
+});
+
+const joe = new Instructor({
+  name: "Joe",
+  location: "Arkansas",
+  age: 30,
+  favLanguage: "Haskell",
+  specialty: "Lambda Calculus",
+  catchPhrase: `Forget the variables!`
+});
+
+// PMs
+const billy = new ProjectManager({
+  name: "Billy",
+  location: "Virginia",
+  age: 16,
+  specialty: "Networking",
+  favLanguage: "C",
+  catchPhrase: "Don't forget to make an RSA key!",
+  gradClassName: "CS1",
+  favInstructor: joe
+});
+
+const isaiah = new ProjectManager({
+  name: "Isaiah",
+  location: "South Carolina",
+  age: 20,
+  specialty: "Data Processing",
+  favLanguage: "Python",
+  catchPhrase: "There's only one way to do it right!",
+  gradClassName: "CS2",
+  favInstructor: joe
+});
+
+// STUDENTS
+const franz = new Student({
+  name: "Franz",
+  location: "Alabama",
+  age: 36,
+  previousBackground: "Manufacturing",
+  className: "WEB23",
+  favSubjects: ["Back-end", "Data Processing", "Higher-Order Functions"],
+  grade: 80
+});
+
+const raphael = new Student({
+  name: "Raphael",
+  location: "Texas",
+  age: 26,
+  previousBackground: "Construction",
+  className: "WEB23",
+  favSubjects: ["Networking", "System Programming", "C"],
+  grade: 90
+});
+
+// ***********
+// ** TESTS **
+// ***********
+console.log("\n\n\n\n****** lambda-classes.js *******\n\n");
+
+// INSTRUCTOR TESTS
+console.log("+ Instructor Tests +\n\n");
+// Testing Fred
+console.log(
+  `${fred.name}'s favorite language is ${fred.favLanguage}. ${
+    fred.name
+  }'s specialty is ${fred.specialty}.`
+);
+console.log(`${fred.name} likes to say, "${fred.catchPhrase}"`);
+fred.speak();
+fred.demo("classical inheritance");
+console.log("\n");
+
+// Testing Joe
+console.log(
+  `${joe.name}'s favorite language is ${joe.favLanguage}. ${
+    joe.name
+  }'s specialty is ${joe.specialty}.`
+);
+console.log(`${joe.name} likes to say, "${joe.catchPhrase}"`);
+joe.speak();
+joe.demo("recursion");
+
+// PM TESTS
+console.log("\n\n+ Project Manager Tests +\n\n");
+
+// Testing Billy
+billy.speak();
+console.log(`${billy.name} graduated in the class ${billy.gradClassName}.`);
+console.log(
+  `${billy.name}'s favorite instructor is ${billy.favInstructor.name}.`
+);
+billy.standUp("web23_billy");
+billy.demo("HTML");
+billy.debugsCode(raphael, "HTML");
+
+// Testing Isaiah
+console.log("\n");
+isaiah.speak();
+console.log(`${isaiah.name} graduated in the class ${isaiah.gradClassName}.`);
+console.log(
+  `${isaiah.name}'s favorite instructor is ${isaiah.favInstructor.name}.`
+);
+isaiah.standUp("web23_isaiah");
+isaiah.demo("CSS");
+isaiah.debugsCode(franz, "CSS");
+
+// STUDENT TESTS
+console.log("\n\n+ Student Tests +\n\n");
+
+// Testing Joel
+franz.speak();
+console.log(
+  `Before joining Lambda School's ${franz.className}, ${franz.name} worked in ${
+    franz.previousBackground
+  }.`
+);
+franz.listsSubjects();
+franz.PRAssignment("CSS");
+franz.sprintChallenge("CSS");
+
+// Testing Raphael
+console.log("\n");
+raphael.speak();
+console.log(
+  `Before joining Lambda School's ${raphael.className}, ${
+    raphael.name
+  } worked in ${raphael.previousBackground}.`
+);
+raphael.listsSubjects();
+raphael.PRAssignment("HTML");
+raphael.sprintChallenge("HTML");
 
 /*
 Stretch Problem
