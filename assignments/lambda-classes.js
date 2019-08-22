@@ -1,4 +1,5 @@
 // CODE here for your Lambda Classes
+
 /*
 - We have a school to build here! This project will get you used to thinking about classes in JavaScript and building them from a brand new data set.
 * Lambda personnel can be broken down into three different types of people.
@@ -22,7 +23,19 @@ const fred = new Instructor({
 // * Person receives `name` `age` `location` all as props
 // * Person receives `speak` as a method.
 // * This method logs out a phrase `Hello my name is Fred, I am from Bedrock` where `name` and `location` are the object's own props
-​
+
+class Person {
+    constructor(attributes){
+        this.name = attributes.name;
+        this.age = attributes.age;
+        this.location = attributes.location;
+    }
+
+    speak() {
+        console.log(`Hello my name is ${this.name}, I am from ${this.location}.`)
+    }
+}
+
 ​
 ​
 // * Instructor has the following unique props:
@@ -33,9 +46,6 @@ const fred = new Instructor({
 //   * `demo` receives a `subject` string as an argument and logs out the phrase 'Today we are learning about {subject}' where subject is the param passed in.
 //   * `grade` receives a `student` object and a `subject` string as arguments and logs out '{student.name} receives a perfect score on {subject}'
 ​
-​
-// * If the student's grade is above a 70% let them graduate! 
-//   * Otherwise go back to grading their assignments to increase their score.
 ​
 ​
 ​
