@@ -85,20 +85,21 @@ class Student extends Person {
   }
 
   graduate() {
-    let graduate = false;
-    let assignmentCounter = 0;
-    while (!graduate && assignmentCounter < 5) {
+    let assignmentCount = 0;
+
+    while (assignmentCount < 5) {
       if (this.averageGrade() >= 70) {
-        graduate = true;
         console.log(
           `${
             this.name
-          } has graduated from Lambda School with an average grade of ${this.averageGrade()}!`
+          } has graduated from Lambda School with an average grade of ${this.averageGrade().toFixed(
+            2
+          )}!`
         );
         return;
       } else {
         this.pm.gradeAssignment(this);
-        assignmentCounter++;
+        assignmentCount++;
         console.log(
           `${
             this.name
@@ -108,6 +109,7 @@ class Student extends Person {
         );
       }
     }
+
     console.log(
       `After grading all of ${
         this.name
