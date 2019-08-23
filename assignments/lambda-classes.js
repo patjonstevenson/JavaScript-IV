@@ -90,13 +90,19 @@ class Student extends Person {
     while (!graduate && assignmentCounter < 5) {
       if (this.averageGrade() >= 70) {
         graduate = true;
-        console.log(`${this.name} has graduated from Lambda School!`);
+        console.log(
+          `${
+            this.name
+          } has graduated from Lambda School with an average grade of ${this.averageGrade()}!`
+        );
         return;
       } else {
         this.pm.gradeAssignment(this);
         assignmentCounter++;
         console.log(
-          `${this.name}'s GPA is still too low to graduate.. let's have ${
+          `${
+            this.name
+          }'s average grade is still too low to graduate.. let's have ${
             this.pm.name
           } grade some more assignments..`
         );
@@ -105,7 +111,7 @@ class Student extends Person {
     console.log(
       `After grading all of ${
         this.name
-      }'s assignments, the GPA is ${this.averageGrade()}, which is unfortunately too low to graduate.`
+      }'s assignments, the average grade is ${this.averageGrade()}, which is unfortunately too low to graduate.`
     );
   }
 }
@@ -268,14 +274,19 @@ Stretch Problem
     - If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
 
-console.log("\n\n\nTESTING STRETCH - gradeStudent METHOD \n\n");
+console.log("\n\n\n+ Testing Stretch +\n\n");
 
-console.log(`${raphael.name}'s current grade: ${raphael.averageGrade()}`);
+console.log(
+  `${raphael.name}'s current grade: ${raphael.averageGrade().toFixed(2)}`
+);
 console.log(`${raphael.pm.name} grades ${raphael.name}'s assignment...`);
 raphael.pm.gradeAssignment(raphael);
-console.log(`Raphael's Grades: ${raphael.grades}`);
+console.log(`Raphael's grades:`);
+raphael.grades.forEach(grade => console.log(grade.toFixed(2)));
 console.log(
-  `${raphael.name}'s grade after assignment: ${raphael.averageGrade()}`
+  `${raphael.name}'s grade after assignment: ${raphael
+    .averageGrade()
+    .toFixed(2)}`
 );
 
 raphael.graduate();
